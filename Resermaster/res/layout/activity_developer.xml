@@ -6,28 +6,22 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    tools:context=".DeveloperActivity" >
 
-    <EditText
-        android:id="@+id/editTextField"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:ems="10" >
+        android:text="@string/title_activity_developer" />
 
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/buttonDeveloperActivity"
+     <Button
+        android:id="@+id/buttonMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="44dp"
         android:layout_marginRight="28dp"
-        android:text="@string/title_activity_developer" 
-        android:onClick="onButtonDeveloperActivityClick"	/>
-    	
-
+        android:text="@string/title_activity_main" 
+        android:onClick="onButtonMainActivityClick"	/>
+    
 </RelativeLayout>
