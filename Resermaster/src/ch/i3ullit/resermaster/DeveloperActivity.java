@@ -22,7 +22,7 @@ public class DeveloperActivity extends Activity {
 	}
 	
 	// Go back to MainActivity
-	public void onButtonDeveloperActivityClick(View view){
+	public void onButtonMainActivityClick(View view){
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}
