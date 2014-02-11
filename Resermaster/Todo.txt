@@ -1,0 +1,17 @@
+Abgabetermin der Thesis: Juli
+===================================
+Nächste Schritte:
+
+NFC
+===
+
+[ ] NFC dispatchen
+
+Facebook
+========
+
+[ ] FB Login
+
+Entwürfe
+========
+[ ] GUI Skizzen
