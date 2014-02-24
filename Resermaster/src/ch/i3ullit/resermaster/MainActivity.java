@@ -4,7 +4,6 @@ import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -16,12 +15,14 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 	private static final String TAG = MainActivity.class.getSimpleName();
-	NdefMessage[] msgs;
-	NfcAdapter nfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
+//	NdefMessage[] msgs;
+	NfcAdapter nfc;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "@MainActivity.onResume");
 		super.onCreate(savedInstanceState);
+		nfc = NfcAdapter.getDefaultAdapter(getApplicationContext());
 		setContentView(R.layout.activity_main);
 	}
 
@@ -38,17 +39,22 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "@MainActivity.onResume");
 		
 		//	Context activity;
-		Intent i = new Intent(this, DeveloperActivity.class);
+		Intent i = new Intent(this, MainActivity.class);
 		i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		PendingIntent intent = PendingIntent.getActivity(this, 0, i, 0);
 		nfc.enableForegroundDispatch(this, intent, null, null);
+		Log.d(TAG, "enableForegroundDispatch");
+		
 	}
 	
-	public void onPause(){
+	protected void onPause(){
 		nfc.disableForegroundDispatch(this);
+		Log.d(TAG, "disableForegroundDispatch");
+		super.onPause();
 	}
 	
-	public void onNewIntent(Intent intent){
+	protected void onNewIntent(Intent intent){
+		Log.d(TAG, "@MainActivity.onNewIntent");
 		Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 		Log.d(TAG, "From Tag: " +tag.toString());
 	}
