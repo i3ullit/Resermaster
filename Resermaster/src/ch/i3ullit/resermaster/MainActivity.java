@@ -3,6 +3,8 @@ package ch.i3ullit.resermaster;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -56,7 +58,27 @@ public class MainActivity extends Activity {
 	protected void onNewIntent(Intent intent){
 		Log.d(TAG, "@MainActivity.onNewIntent");
 		Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+		
 		Log.d(TAG, "From Tag: " +tag.toString());
+		
+		String techs[] = tag.getTechList();
+		boolean containsNdef = false;
+		boolean containsNdefFormatable = false;
+		for (String tech : techs) {
+			if (tech.equals("android.nfc.tech.Ndef"))containsNdef = true;
+			if (tech.equals("android.nfc.tech.NdefFormatable"))containsNdefFormatable = true;
+			}
+		if (containsNdef) {Ndef ndef = Ndef.get(tag);
+		Log.d("demo", "NdeF Tag Tech discovered");
+		Log.d("demo", "NFC Forum Tag Type: " + ndef.getType());
+		Log.d("demo", "Max size in bytes: " + ndef.getMaxSize());
+		Log.d("demo", "Can tag be made read only? " + ndef.canMakeReadOnly());
+		Log.d("demo", "Is writable?: " + ndef.isWritable());
+		//NFCUtil.printNdefMessageDetails(ndef.getCachedNdefMessage()));
+		}
+		if (containsNdefFormatable) {NdefFormatable ndef = NdefFormatable.get(tag);
+		Log.d("demo", "NdefFormatable Tag Tech discovered\n");}
+		
 	}
 	
 /*	public void onResume(){
