@@ -1,6 +1,8 @@
 package ch.i3ullit.resermaster;
 
+import ch.i3ullit.NFC_Utils.NFCUtil;
 import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
@@ -74,11 +76,28 @@ public class MainActivity extends Activity {
 		Log.d("demo", "Max size in bytes: " + ndef.getMaxSize());
 		Log.d("demo", "Can tag be made read only? " + ndef.canMakeReadOnly());
 		Log.d("demo", "Is writable?: " + ndef.isWritable());
-		//NFCUtil.printNdefMessageDetails(ndef.getCachedNdefMessage()));
+		
 		}
 		if (containsNdefFormatable) {NdefFormatable ndef = NdefFormatable.get(tag);
-		Log.d("demo", "NdefFormatable Tag Tech discovered\n");}
+		Log.d("demo", "NdefFormatable Tag Tech discovered\n");
+		}
 		
+		Ndef ndef = Ndef.get(tag);
+		NdefMessage message = ndef.getCachedNdefMessage(); 
+		for (NdefRecord record : message.getRecords())
+		{
+		Log.d("Tag Reading", "Record of the Tag: " +record.getPayload().toString());
+		
+		StringBuffer b = null;
+		
+	//	b.append(String.format("TNF_ABSOLUTE_URI: type(%1$s), id(%2$s), payload(%3$s)\n",
+	//			new String(record.getType()), tag.getId().toString(),
+	//			new String(record.getPayload())));
+		Log.d("Tag Content", "Printing Tag Content");
+		Log.d("Tag Content", "Tag Content: " +record.getPayload());
+		
+		}
+			
 	}
 	
 /*	public void onResume(){
