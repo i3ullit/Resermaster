@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_developer">DeveloperActivity</string>
  	
-    <string name="explanation">Status</string>
+    <string name="explanation">NFC Enabled</string>
     <string name="title_activity_main">MainActivity</string>
 
 </resources>
