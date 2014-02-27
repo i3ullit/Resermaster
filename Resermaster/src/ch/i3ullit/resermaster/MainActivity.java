@@ -229,7 +229,7 @@ public class MainActivity extends Activity {
 	    @Override
 	    protected void onPostExecute(String result) {
 	        if (result != null) {
-	        	mEditText.setText("Read content: " + result);
+	        	mEditText.setText(result);
 	        }
 	    }
 	}
