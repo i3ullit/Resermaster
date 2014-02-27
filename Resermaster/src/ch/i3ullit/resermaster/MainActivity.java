@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class MainActivity extends Activity {
 	public static final String MIME_TEXT_PLAIN = "text/plain";
 	
 	private TextView mTextView;
+	private EditText mEditText;
     private NfcAdapter mNfcAdapter;
 	
 	@Override
@@ -36,6 +38,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		mTextView = (TextView) findViewById(R.id.textView_explanation);
+		mEditText = (EditText) findViewById(R.id.editTextField);
 		
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		
@@ -226,7 +229,7 @@ public class MainActivity extends Activity {
 	    @Override
 	    protected void onPostExecute(String result) {
 	        if (result != null) {
-	            mTextView.setText("Read content: " + result);
+	        	mEditText.setText("Read content: " + result);
 	        }
 	    }
 	}
