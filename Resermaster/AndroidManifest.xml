@@ -26,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             
-  <!--           <intent-filter>
+  <!--      TECH_DISCOVERED has a lower priority than NDEF_DISCOVERED. Due to that fact, the app is started directly. 2014-02-27 WiR   
+  
+  			<intent-filter>
         		<action android:name="android.nfc.action.TECH_DISCOVERED" />
     		</intent-filter>
  
