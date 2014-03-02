@@ -5,7 +5,7 @@ Nächste Schritte:
 NFC
 ===
 
-[ ] NFC dispatchen
+[x] NFC dispatchen
 
 Facebook
 ========

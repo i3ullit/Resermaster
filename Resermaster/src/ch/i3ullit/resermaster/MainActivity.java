@@ -2,6 +2,9 @@ package ch.i3ullit.resermaster;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+
+import ch.i3ullit.resermaster.nfc.NdefReadTask;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -30,6 +33,7 @@ public class MainActivity extends Activity {
 	private TextView mTextView;
 	private EditText mEditText;
 	private NfcAdapter mNfcAdapter;
+	private NdefReadTask readTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class MainActivity extends Activity {
 		mEditText = (EditText) findViewById(R.id.editTextField);
 
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		
+		readTask = new NdefReadTask();
 
 		if (mNfcAdapter == null) {
 			// Stop here, we definitely need NFC
@@ -67,7 +73,7 @@ public class MainActivity extends Activity {
 			if (MIME_TEXT_PLAIN.equals(type)) {
 
 				Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-				new NdefReaderTask().execute(tag);
+				readTask.execute(tag);
 
 			} else {
 				Log.d(TAG, "Wrong mime type: " + type);
@@ -81,10 +87,23 @@ public class MainActivity extends Activity {
 
 			for (String tech : techList) {
 				if (searchedTech.equals(tech)) {
-					new NdefReaderTask().execute(tag);
+					readTask.execute(tag);
 					break;
 				}
 			}
+		}
+		String ndefText = null;
+		try {
+			ndefText = readTask.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if( ndefText!= null){
+			mEditText.setText(ndefText);
 		}
 	}
 
